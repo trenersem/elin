@@ -2,6 +2,7 @@
 
 import { Fragment, useState } from 'react';
 import { IAdminNavigation } from '../page';
+import Image from 'next/image';
 
 
 interface INavProps {
@@ -23,7 +24,7 @@ const Nav: React.FC<INavProps> = ({ navigation, setActiveTab }) => {
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <img className="h-8 w-8" src="/logo.png" alt="Your Company" />
+                  <Image className="h-8 w-8" src="/logo.png" alt="Your Company" />
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
