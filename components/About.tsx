@@ -13,7 +13,7 @@ const About = () => {
         <div className="md:w-1/2">
          
           <p className="mt-6 mb-6 text-base text-zinc-600 dark:text-zinc-400">
-            Hi, I'm Alina, a professional lashmaker with over eight years of experience. I am passionate about creating beautiful, customized eyelash extensions that enhance your natural beauty. My commitment to excellence ensures that every client leaves with a stunning and flawless look.
+            Hi, I&apos;m Alina, a professional lashmaker with over eight years of experience. I am passionate about creating beautiful, customized eyelash extensions that enhance your natural beauty. My commitment to excellence ensures that every client leaves with a stunning and flawless look.
           </p>
         </div>
         <div className="md:w-1/2">
