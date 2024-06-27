@@ -5,6 +5,8 @@ import Nav from './nav';
 import Time from './time';
 import Calendar from '@/components/calendar';
 
+export const fetchCache = 'force-no-store';
+
 export interface IAdminNavigation {
   name: string,
   current: boolean,
