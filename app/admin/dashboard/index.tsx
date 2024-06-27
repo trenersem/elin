@@ -13,7 +13,6 @@ import { format } from 'date-fns/format';
 import { toDate } from 'date-fns/toDate';
 import { convertAppointmentDate } from '@/utils/converteAppointmentDate';
 
-export const fetchCache = 'force-no-store';
 
 const Dashboard: React.FC = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
@@ -27,8 +26,18 @@ const Dashboard: React.FC = () => {
         return new Date(dateA).getTime() - new Date(dateB).getTime();
     });
 
-  useEffect(() => {
-    const fetchData = async () => {
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await fetchAppointments();
+  //       setAppointments(data);
+  //     } catch (error) {
+  //       console.error('Failed to fetch appointments:', error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+  const fetchData = async () => {
       try {
         const data = await fetchAppointments();
         setAppointments(data);
@@ -36,8 +45,6 @@ const Dashboard: React.FC = () => {
         console.error('Failed to fetch appointments:', error);
       }
     };
-    fetchData();
-  }, []);
 
 
   return (
@@ -55,6 +62,7 @@ const Dashboard: React.FC = () => {
                         selectedDateAppointmets={selectedDateAppointmets}
                     />
                 </div>
+                <div className='bg-blue-500' onClick={fetchData}> button</div>
             </div>
         </div>
   );
