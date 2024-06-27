@@ -26,7 +26,7 @@ const Nav: React.FC<INavProps> = ({ navigation, setActiveTab }) => {
                 <div className="flex-shrink-0">
                   <Image src="/logo.png" alt="Your Company" width={10} height={10}/>
                 </div>
-                <div className="hidden md:block">
+                <div className="">
                   <div className="ml-10 flex items-baseline space-x-4">
                     {navigation.map((item) => (
                       <div
