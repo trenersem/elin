@@ -5,7 +5,7 @@ const nextConfig = {
 //          appDir: true,
 //          serverComponentsExternalPackages: ["mongoose"],
 //      },
-//      output: 'export',
+     output: 'standalone',
 //      webpack(config) {
 //          config.experiments = {
 //         ...config.experiments,
