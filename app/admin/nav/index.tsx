@@ -24,7 +24,7 @@ const Nav: React.FC<INavProps> = ({ navigation, setActiveTab }) => {
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Image className="h-8 w-8" src="/logo.png" alt="Your Company" />
+                  <Image src="/logo.png" alt="Your Company" width={10} height={10}/>
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
