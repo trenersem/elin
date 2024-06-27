@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { fetchAppointments } from '@/services/fetchAppointments';
+import { getAppointments } from '@/services/getAppointments';
 import { IAppointment } from '@/types';
 import AppointmentTable from './AppointmentTable';
 import Calendar from '@/components/calendar';
@@ -26,27 +26,18 @@ const Dashboard: React.FC = () => {
         return new Date(dateA).getTime() - new Date(dateB).getTime();
     });
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await fetchAppointments();
-  //       setAppointments(data);
-  //     } catch (error) {
-  //       console.error('Failed to fetch appointments:', error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-  const fetchData = async () => {
+  useEffect(() => {
+    const getData = async () => {
       try {
-        const data = await fetchAppointments();
+        const data = await getAppointments();
         setAppointments(data);
       } catch (error) {
         console.error('Failed to fetch appointments:', error);
       }
     };
-
-
+    getData();
+  }, []);
+  
   return (
         <div className='pt-16 bg-white min-h-[100vh]'>
             <div className='max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
@@ -62,7 +53,6 @@ const Dashboard: React.FC = () => {
                         selectedDateAppointmets={selectedDateAppointmets}
                     />
                 </div>
-                <div className='bg-blue-500' onClick={fetchData}> button</div>
             </div>
         </div>
   );
