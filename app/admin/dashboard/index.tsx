@@ -13,7 +13,7 @@ import { format } from 'date-fns/format';
 import { toDate } from 'date-fns/toDate';
 import { convertAppointmentDate } from '@/utils/converteAppointmentDate';
 
-
+export const fetchCache = 'force-no-store';
 
 const Dashboard: React.FC = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
