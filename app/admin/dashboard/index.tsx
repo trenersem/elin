@@ -12,6 +12,7 @@ import AppointmetsList from './components/AppointmetsList';
 import { format } from 'date-fns/format';
 import { toDate } from 'date-fns/toDate';
 import { convertAppointmentDate } from '@/utils/converteAppointmentDate';
+import { useRouter } from 'next/navigation';
 
 
 const Dashboard: React.FC = () => {
@@ -26,6 +27,10 @@ const Dashboard: React.FC = () => {
         return new Date(dateA).getTime() - new Date(dateB).getTime();
     });
 
+  const router = useRouter();
+
+  const test = () => router.refresh()
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -35,6 +40,7 @@ const Dashboard: React.FC = () => {
         console.error('Failed to fetch appointments:', error);
       }
     };
+    router.refresh()
     getData();
   }, []);
   
@@ -54,6 +60,7 @@ const Dashboard: React.FC = () => {
                     />
                 </div>
             </div>
+            <button onClick={test} type='button'> TESt</button>
         </div>
   );
 };
