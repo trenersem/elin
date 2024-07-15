@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
                     />
                 </div>
             </div>
-            <button onClick={test} type='button'> TESt</button>
+            <button onClick={test} className='bg-green' type='button'> TESt</button>
         </div>
   );
 };

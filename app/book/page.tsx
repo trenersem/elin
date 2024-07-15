@@ -5,6 +5,9 @@ const page = () => {
   return (
     <div>
         <BookForm />
+        <a href='/admin'>
+          Admin
+        </a>
     </div>
   )
 }
