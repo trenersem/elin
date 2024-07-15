@@ -14,7 +14,7 @@ import { toDate } from 'date-fns/toDate';
 import { convertAppointmentDate } from '@/utils/converteAppointmentDate';
 import { useRouter } from 'next/navigation';
 
-
+export 
 const Dashboard: React.FC = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
   //const [selectedDateAppointmets, setSelectedDateAppointmets] =  useState<IAppointment[]>([]);
