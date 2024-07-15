@@ -1,11 +1,11 @@
 'use client'
+
 import React, { useState } from 'react';
 import Dashboard from './dashboard';
 import Nav from './nav';
 import Time from './time';
 import Calendar from '@/components/calendar';
-
-export const fetchCache = 'force-no-store';
+import { useRouter } from 'next/navigation'
 
 export interface IAdminNavigation {
   name: string,
@@ -19,6 +19,9 @@ const navigationData: IAdminNavigation[] = [
 
 const Page = () => {
   const [navigation, setNavigation] = useState<IAdminNavigation[]>(navigationData);
+  const router = useRouter();
+
+  const test = () => router.refresh()
 
   const setActiveTab = (tabName: string) => {
     setNavigation(navigation.map(nav => ({
@@ -42,6 +45,7 @@ const Page = () => {
   return (
     <div className='relative bg-black'>
       <Nav navigation={navigation} setActiveTab={setActiveTab} />
+      <button onClick={test} type='button'> TESt</button>
       {getActiveComponent()}
     </div>
   );
