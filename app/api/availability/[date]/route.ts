@@ -1,72 +1,82 @@
-import Availability from "@/models/availability";
-import { connectToDB } from "@/utils/database";
+import { NextRequest, NextResponse } from 'next/server';
+import Availability from '@/models/availability';
+import { connectToDB } from '@/utils/database';
 
+// GET: Get availability by date
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ date: string }> }
+) {
+  const { date } = await params;
 
+  try {
+    await connectToDB();
 
+    const availabilityByDate = await Availability.find({
+      date: date,
+    });
 
-export const GET = async (req: Request, {
-    params,
-}: {params: {date:string}}): Promise<Response> => {
-    try {
-        await connectToDB();
-        const availabilityByDate =  await Availability.find({
-            date: params.date,
-        })
-
-        return new Response(JSON.stringify(availabilityByDate), {
-            status: 200,
-        })
-    } catch (err) {
-        console.error(err)
-        return new Response('Failed to fetch availabilityByDate', {
-            status: 500,
-        })
-    }
+    return NextResponse.json(availabilityByDate);
+  } catch (err) {
+    console.error('GET error:', err);
+    return new Response('Failed to fetch availabilityByDate', {
+      status: 500,
+    });
+  }
 }
 
-export const PUT = async (req: Request, {
-        params,
-}: {params: {date:string}}): Promise<Response> => {
-    const { blocked_time } =  await req.json();
+// PUT: Create availability for the date
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ date: string }> }
+) {
+  const { date } = await params;
+  const { blocked_time } = await req.json();
 
+  try {
+    await connectToDB();
 
-    try {
+    const availability = new Availability({
+      date,
+      blocked_time,
+    });
 
-        await connectToDB();
+    await availability.save();
 
-        const availability = new Availability({
-            date: params.date,
-            blocked_time
-        });
+    return new Response('Successfully blocked the time', { status: 200 });
+  } catch (error) {
+    console.error('PUT error:', error);
+    return new Response('Error to block the time', { status: 500 });
+  }
+}
 
-        await availability.save();
+// PATCH: Update blocked_time for the availability by ID (date = _id)
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<{ date: string }> }
+) {
+  const { date } = await params;
+  const { blocked_time } = await req.json();
 
-        return new Response("Successfully blocked the existingAvailability", { status: 200 });
-    } catch (error) {
-        return new Response("Error to Block the time", { status: 500 });
+  try {
+    await connectToDB();
+
+    const existingAvailability = await Availability.findById(date);
+
+    if (!existingAvailability) {
+      return new Response('Availability not found', {
+        status: 404,
+      });
     }
-};
 
-export const PATCH = async (req: Request, {
-    params
-} : {params: {date: string}}): Promise<Response> => {
-    const { blocked_time } =  await req.json();
-    console.log('params', params)
-    try {
-        await connectToDB();
-        const existingAvailability = await Availability.findById(params.date)
+    existingAvailability.blocked_time = blocked_time;
+    await existingAvailability.save();
 
-
-        if(!existingAvailability)  return new Response("existingAppointment not found", {
-            status: 404
-        });
-
-        existingAvailability.blocked_time = blocked_time
-
-        existingAvailability.save();
-
-        return new Response("Successfully updated bloked tine!", {status: 200});
-    } catch (err) {
-        return new Response ("Error Updating existingAvailability", { status: 500});
-    }
+    return new Response('Successfully updated blocked time!', {
+      status: 200,
+    });
+  } catch (err) {
+    console.error('PATCH error:', err);
+    return new Response('Error updating availability', { status: 500 });
+  }
 }
