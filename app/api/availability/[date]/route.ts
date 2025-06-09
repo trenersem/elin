@@ -5,16 +5,12 @@ import { connectToDB } from '@/utils/database';
 // GET: Get availability by date
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ date: string }> }
+  { params }: { params: { date: string } }
 ) {
-  const { date } = await params;
-
   try {
     await connectToDB();
 
-    const availabilityByDate = await Availability.find({
-      date: date,
-    });
+    const availabilityByDate = await Availability.find({ date: params.date });
 
     return NextResponse.json(availabilityByDate);
   } catch (err) {
@@ -28,16 +24,15 @@ export async function GET(
 // PUT: Create availability for the date
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ date: string }> }
+  { params }: { params: { date: string } }
 ) {
-  const { date } = await params;
   const { blocked_time } = await req.json();
 
   try {
     await connectToDB();
 
     const availability = new Availability({
-      date,
+      date: params.date,
       blocked_time,
     });
 
@@ -53,15 +48,14 @@ export async function PUT(
 // PATCH: Update blocked_time for the availability by ID (date = _id)
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ date: string }> }
+  { params }: { params: { date: string } }
 ) {
-  const { date } = await params;
   const { blocked_time } = await req.json();
 
   try {
     await connectToDB();
 
-    const existingAvailability = await Availability.findById(date);
+    const existingAvailability = await Availability.findById(params.date);
 
     if (!existingAvailability) {
       return new Response('Availability not found', {

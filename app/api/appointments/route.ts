@@ -1,16 +1,17 @@
+import { NextRequest, NextResponse } from 'next/server';
 import Appointment from '@/models/appointments';
 import { connectToDB } from '@/utils/database';
 
-export const GET = async (request: Request): Promise<Response> => {
-  await connectToDB();
-
+// GET: Fetch all appointments
+export async function GET(req: NextRequest) {
   try {
-      await connectToDB();
+    await connectToDB();
 
-      const users = await Appointment.find({});
+    const appointments = await Appointment.find({});
 
-      return new Response(JSON.stringify(users), { status: 200 });
+    return NextResponse.json(appointments);
   } catch (error) {
-      return new Response("Failed to fetch all users", { status: 500 });
+    console.error('GET all appointments error:', error);
+    return new Response('Failed to fetch all appointments', { status: 500 });
   }
 }
