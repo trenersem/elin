@@ -4,25 +4,26 @@ import { connectToDB } from "@/utils/database";
 
 
 
-export const GET = async (req: Request, {
-    params,
-}: {params: {date:string}}): Promise<Response> => {
-    try {
-        await connectToDB();
-        const appoimentsByDate =  await Appointment.find({
-            appointment_date: params.date,
-        })
+export const GET = async (
+  req: Request,
+  context: { params: { date: string } }
+): Promise<Response> => {
+  try {
+    await connectToDB();
+    const appoimentsByDate = await Appointment.find({
+      appointment_date: context.params.date,
+    });
 
-        return new Response(JSON.stringify(appoimentsByDate), {
-            status: 200,
-        })
-    } catch (err) {
-        console.error(err)
-        return new Response('Failed to fetch appoimentsByDate', {
-            status: 500,
-        })
-    }
-}
+    return new Response(JSON.stringify(appoimentsByDate), {
+      status: 200,
+    });
+  } catch (err) {
+    console.error(err);
+    return new Response('Failed to fetch appoimentsByDate', {
+      status: 500,
+    });
+  }
+};
 
 export const DELETE = async (req: Request, {
     params,
