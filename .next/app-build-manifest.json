@@ -22,12 +22,12 @@
       "static/chunks/main-app-4e9e92732a521c70.js",
       "static/chunks/app/api/appointments/[date]/route-211b906cc8098679.js"
     ],
-    "/api/availability/[date]/route": [
+    "/api/appointments/new/route": [
       "static/chunks/webpack-72a70bfa6a2469ea.js",
       "static/chunks/4bd1b696-04c42abb60d533fd.js",
       "static/chunks/684-f106b2114216ff81.js",
       "static/chunks/main-app-4e9e92732a521c70.js",
-      "static/chunks/app/api/availability/[date]/route-46c8afb3f22f900d.js"
+      "static/chunks/app/api/appointments/new/route-fadba59b2aedc361.js"
     ],
     "/api/appointments/route": [
       "static/chunks/webpack-72a70bfa6a2469ea.js",
@@ -36,12 +36,12 @@
       "static/chunks/main-app-4e9e92732a521c70.js",
       "static/chunks/app/api/appointments/route-b4d43bd1542007c8.js"
     ],
-    "/api/appointments/new/route": [
+    "/api/availability/[date]/route": [
       "static/chunks/webpack-72a70bfa6a2469ea.js",
       "static/chunks/4bd1b696-04c42abb60d533fd.js",
       "static/chunks/684-f106b2114216ff81.js",
       "static/chunks/main-app-4e9e92732a521c70.js",
-      "static/chunks/app/api/appointments/new/route-fadba59b2aedc361.js"
+      "static/chunks/app/api/availability/[date]/route-46c8afb3f22f900d.js"
     ],
     "/admin/page": [
       "static/chunks/webpack-72a70bfa6a2469ea.js",
